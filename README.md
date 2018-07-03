@@ -34,6 +34,8 @@ In order to connect to any AWS service (for example: AWS Secrets Manager), your 
 that AWS service. Since there are several scenarios for this, depending on your environment setup, configuring
 environments and using credentials is covered here: [AWS credentials and authentication](./doc/aws_credentials.md)
 
+[![Build Status](https://travis-ci.org/incompass/aws-secrets-bundle.svg?branch=master)](https://travis-ci.org/incompass/aws-secrets-bundle)
+
 ## Installation
 
 There are two main versions of AWS Secrets bundle: 1.x and 2.x.
