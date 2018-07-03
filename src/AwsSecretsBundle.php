@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * Class AwsSecretsBundle
  * @package AwsSecretsBundle
- * @author  Joe Mizzi <themizzi@me.com>
+ * @author  Joe Mizzi <joe@casechek.com>
  *
  * @codeCoverageIgnore
  */
