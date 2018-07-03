@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Class AwsSecretsExtension
  * @package AwsSecretsBundle\DependencyInjection
- * @author  Joe Mizzi <themizzi@me.com>
+ * @author  Joe Mizzi <joe@casechek.com>
  *
  * @codeCoverageIgnore
  */
