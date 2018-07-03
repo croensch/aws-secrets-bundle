@@ -9,6 +9,11 @@ use Constup\AwsSecretsBundle\Provider\AwsSecretsEnvVarProviderInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
+/**
+ * Class AwsSecretsEnvVarProcessorTest
+ * @package Tests\AwsSecretsBundle
+ * @author  Joe Mizzi <themizzi@me.com>
+ */
 class AwsSecretsEnvVarProcessorTest extends TestCase
 {
     use ProphecyTrait;

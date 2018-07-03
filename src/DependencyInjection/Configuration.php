@@ -7,6 +7,13 @@ namespace Constup\AwsSecretsBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * Class Configuration
+ * @package AwsSecretsBundle\DependencyInjection
+ * @author  Joe Mizzi <themizzi@me.com>
+ *
+ * @codeCoverageIgnore
+ */
 class Configuration implements ConfigurationInterface
 {
     /**

@@ -17,6 +17,13 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Reference;
 
+/**
+ * Class AwsSecretsExtension
+ * @package AwsSecretsBundle\DependencyInjection
+ * @author  Joe Mizzi <themizzi@me.com>
+ *
+ * @codeCoverageIgnore
+ */
 class AwsSecretsExtension extends Extension
 {
     /**
@@ -34,6 +41,8 @@ class AwsSecretsExtension extends Extension
 
         $container->setParameter('aws_secrets.ttl', $configs['ttl']);
         $container->setParameter('aws_secrets.ignore', $configs['ignore']);
+        $container->setParameter('aws_secrets.aws_key', $configs['aws_key']);
+        $container->setParameter('aws_secrets.aws_secret', $configs['aws_secret']);
         $container->setParameter('aws_secrets.delimiter', $configs['delimiter']);
 
         $container->register('aws_secrets.secrets_manager_client', SecretsManagerClient::class)

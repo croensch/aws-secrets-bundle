@@ -9,6 +9,11 @@ use Constup\AwsSecretsBundle\Provider\AwsSecretsEnvVarProviderInterface;
 use Symfony\Component\DependencyInjection\EnvVarProcessorInterface;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
+/**
+ * Class AwsSecretsEnvVarProcessor
+ * @package AwsSecretsBundle
+ * @author  Joe Mizzi <themizzi@me.com>
+ */
 class AwsSecretsEnvVarProcessor implements EnvVarProcessorInterface
 {
     private string $delimiter;
@@ -21,6 +26,8 @@ class AwsSecretsEnvVarProcessor implements EnvVarProcessorInterface
         bool $ignore = false,
         string $delimiter = ','
     ) {
+        $this->secretsManagerClient = $secretsManagerClient;
+        $this->delimiter = $delimiter;
         $this->ignore = $ignore;
         $this->delimiter = $delimiter;
         $this->provider = $provider;
@@ -36,6 +43,8 @@ class AwsSecretsEnvVarProcessor implements EnvVarProcessorInterface
      * @throws RuntimeException on error
      *
      * @return mixed
+     *
+     * @throws RuntimeException on error
      */
     public function getEnv(string $prefix, string $name, Closure $getEnv)
     {
