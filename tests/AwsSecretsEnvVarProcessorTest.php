@@ -81,7 +81,7 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_string(): void
+    public function it_returns_string_for_key(): void
     {
         $callCount = 0;
         $this->provider->get('prefix/db')->willReturn('value');
@@ -101,5 +101,39 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
 
         $this->assertEquals(1, $callCount);
         $this->assertEquals('value', $value);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_string(): void
+    {
+        $json = json_encode(
+            [
+                'key' => 'value',
+            ]
+        );
+
+        $this->secretsManagerClient->getSecretValue(
+            [
+                AwsSecretsEnvVarProcessor::AWS_SECRET_ID => 'prefix/db',
+            ]
+        )->willReturn(
+            new Result(
+                [
+                    AwsSecretsEnvVarProcessor::AWS_SECRET_STRING => $json,
+                ]
+            )
+        );
+
+        $value = $this->processor->getEnv(
+            'aws',
+            'AWS_SECRET',
+            function (string $name) {
+                return 'prefix/db';
+            }
+        );
+
+        $this->assertEquals($json, $value);
     }
 }
