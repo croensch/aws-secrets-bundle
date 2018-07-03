@@ -45,9 +45,6 @@ class AwsSecretsExtension extends Extension
         $container->setParameter('aws_secrets.aws_secret', $configs['aws_secret']);
         $container->setParameter('aws_secrets.delimiter', $configs['delimiter']);
 
-        $container->register(SecretsManagerClientFactory::class, SecretsManagerClientFactory::class)
-            ->addArgument('%aws_secrets.ignore%');
-
         $container->register('aws_secrets.secrets_manager_client', SecretsManagerClient::class)
             ->setLazy(true)
             ->setPublic(false)
