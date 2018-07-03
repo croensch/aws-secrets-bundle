@@ -10,7 +10,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * Class Configuration
  * @package AwsSecretsBundle\DependencyInjection
- * @author  Joe Mizzi <themizzi@me.com>
+ * @author  Joe Mizzi <joe@casechek.com>
  *
  * @codeCoverageIgnore
  */
