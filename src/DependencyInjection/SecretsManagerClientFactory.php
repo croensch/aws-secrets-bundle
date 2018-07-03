@@ -11,6 +11,8 @@ use Exception;
  * Class SecretsManagerFactory
  * @package AwsSecretsBundle\DependencyInjection
  * @author  Joe Mizzi <joe@casechek.com>
+ *
+ * @codeCoverageIgnore
  */
 class SecretsManagerClientFactory
 {
