@@ -7,6 +7,11 @@ namespace Constup\AwsSecretsBundle\DependencyInjection;
 use Aws\SecretsManager\SecretsManagerClient;
 use Exception;
 
+/**
+ * Class SecretsManagerFactory
+ * @package AwsSecretsBundle\DependencyInjection
+ * @author  Joe Mizzi <joe@casechek.com>
+ */
 class SecretsManagerClientFactory
 {
     /**
@@ -22,7 +27,7 @@ class SecretsManagerClientFactory
     public static function createClient(
         string $region,
         string $version,
-        ?string $endpoint, 
+        ?string $endpoint,
         ?string $key,
         ?string $secret
     ): SecretsManagerClient {
