@@ -70,6 +70,9 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
                 $callCount++;
                 if ($callCount === 1) {
                     return 'prefix/db,key';
+                } else {
+                    return 'value';
+                }
                 }
 
                 return null;
@@ -126,11 +129,15 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
             )
         );
 
+        $callCount = 0;
         $value = $this->processor->getEnv(
             'aws',
             'AWS_SECRET',
-            function (string $name) {
-                return 'prefix/db';
+            function (string $name) use (&$callCount) {
+                $callCount++;
+                if ($callCount === 1) {
+                    return 'prefix/db';
+                }
             }
         );
 
