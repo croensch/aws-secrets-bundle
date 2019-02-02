@@ -6,6 +6,9 @@ namespace Constup\AwsSecretsBundle\Provider;
 
 use Aws\SecretsManager\SecretsManagerClient;
 
+/**
+ * @author  Joe Mizzi <joe@casechek.com>
+ */
 class AwsSecretsEnvVarProvider implements AwsSecretsEnvVarProviderInterface
 {
     const AWS_SECRET_ID = 'SecretId';

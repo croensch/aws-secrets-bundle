@@ -26,7 +26,7 @@ class AwsSecretsEnvVarProcessor implements EnvVarProcessorInterface
         bool $ignore = false,
         string $delimiter = ','
     ) {
-        $this->secretsManagerClient = $secretsManagerClient;
+        $this->ignore = $ignore;
         $this->delimiter = $delimiter;
         $this->ignore = $ignore;
         $this->delimiter = $delimiter;

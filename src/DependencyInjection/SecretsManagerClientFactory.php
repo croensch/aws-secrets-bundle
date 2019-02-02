@@ -49,8 +49,8 @@ class SecretsManagerClientFactory
 
         if ($endpoint) {
             $config['endpoint'] = $endpoint;
-        }
+    }
 
         return new SecretsManagerClient($config);
-    }
+}
 }

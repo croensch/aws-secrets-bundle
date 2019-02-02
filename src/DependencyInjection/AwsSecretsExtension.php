@@ -41,8 +41,6 @@ class AwsSecretsExtension extends Extension
 
         $container->setParameter('aws_secrets.ttl', $configs['ttl']);
         $container->setParameter('aws_secrets.ignore', $configs['ignore']);
-        $container->setParameter('aws_secrets.aws_key', $configs['aws_key']);
-        $container->setParameter('aws_secrets.aws_secret', $configs['aws_secret']);
         $container->setParameter('aws_secrets.delimiter', $configs['delimiter']);
 
         $container->register('aws_secrets.secrets_manager_client', SecretsManagerClient::class)
@@ -89,5 +87,9 @@ class AwsSecretsExtension extends Extension
             ->setArgument('$delimiter', $container->getParameter('aws_secrets.delimiter'))
             ->setPublic(false)
             ->addTag('container.env_var_processor');
+
+        $container->register('aws_secrets.secret_value.command', AwsSecretValueCommand::class)
+            ->setArgument('$secretsManagerClient', new Reference('aws_secrets.client'))
+            ->addTag('console.command');
     }
 }
