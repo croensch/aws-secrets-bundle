@@ -90,6 +90,7 @@ class AwsSecretsExtension extends Extension
 
         $container->register('aws_secrets.secret_value.command', AwsSecretValueCommand::class)
             ->setArgument('$secretsManagerClient', new Reference('aws_secrets.client'))
+            ->setPublic(false)
             ->addTag('console.command');
     }
 }
