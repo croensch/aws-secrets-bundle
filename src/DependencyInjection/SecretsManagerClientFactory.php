@@ -51,6 +51,6 @@ class SecretsManagerClientFactory
             $config['endpoint'] = $endpoint;
     }
 
-        return new SecretsManagerClient($config);
+        return new SecretsManagerClient($credentialsConfig);
 }
 }
