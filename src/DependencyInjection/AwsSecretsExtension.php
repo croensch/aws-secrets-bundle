@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Constup\AwsSecretsBundle\DependencyInjection;
 
-use Aws\Credentials\CredentialProvider;
 use Aws\SecretsManager\SecretsManagerClient;
 use Constup\AwsSecretsBundle\AwsSecretsEnvVarProcessor;
 use Constup\AwsSecretsBundle\Provider\AwsSecretsArrayEnvVarProvider;
@@ -44,31 +43,10 @@ class AwsSecretsExtension extends Extension
         $container->setParameter('aws_secrets.ignore', $configs['ignore']);
         $container->setParameter('aws_secrets.delimiter', $configs['delimiter']);
 
-        if (
-            $configs['client_config']['credentials']['key'] === null ||
-            $configs['client_config']['credentials']['secret'] === null
-        ) {
-            unset(
-                $configs['client_config']['credentials']['key'],
-                $configs['client_config']['credentials']['secret']
-            );
-        }
-
-        if ($configs['ecs_enabled']) {
-            $provider = CredentialProvider::ecsCredentials();
-            $memoizedProvider = CredentialProvider::memoize($provider);
-            $configs['client_config']['credentials'] = new SerializableClosure($memoizedProvider);
-        }
-
         $container->register('aws_secrets.secrets_manager_client', SecretsManagerClient::class)
             ->setLazy(true)
-            ->setPublic(false)
-            ->addArgument($configs['client_config']['region'])
-            ->addArgument($configs['client_config']['version'])
-            ->addArgument($configs['client_config']['endpoint'])
-            ->addArgument($configs['client_config']['credentials']['key'])
-            ->addArgument($configs['client_config']['credentials']['secret'])
-            ->setFactory([SecretsManagerClientFactory::class, 'createClient']);
+            ->addArgument($configs['client_config'])
+            ->setPublic(false);
 
         $container->setAlias('aws_secrets.client', 'aws_secrets.secrets_manager_client')
             ->setPublic(true);
