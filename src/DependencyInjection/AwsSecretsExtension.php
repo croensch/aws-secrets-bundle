@@ -43,7 +43,16 @@ class AwsSecretsExtension extends Extension
         $container->setParameter('aws_secrets.ignore', $configs['ignore']);
         $container->setParameter('aws_secrets.delimiter', $configs['delimiter']);
 
-        if ($configs['default_credentials_provider_chain_enabled']) {
+        $credentials = $configs['client_config']['credentials'];
+        if ($credentials['key'] !== null || $credentials['secret'] !== null) {
+            if ($credentials['key'] === null || $credentials['secret'] === null) {
+                throw new Exception('Both key and secret must be provided or neither');
+            }
+        } else {
+            unset($configs['client_config']['credentials']);
+        }
+
+        if (!$configs['client_config']['credentials']['key'] || !$configs['client_config']['credentials']['secret']) {
             unset($configs['client_config']['credentials']);
         }
 
