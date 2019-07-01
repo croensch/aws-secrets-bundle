@@ -10,7 +10,7 @@ use Exception;
 /**
  * Class SecretsManagerFactory
  * @package AwsSecretsBundle\DependencyInjection
- * @author  Joe Mizzi <joe@casechek.com>
+ * @author  James Matsumura <james@casechek.com>
  *
  * @codeCoverageIgnore
  */
