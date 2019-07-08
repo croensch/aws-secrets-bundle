@@ -10,8 +10,6 @@ use Exception;
  * Class SecretsManagerFactory
  * @package AwsSecretsBundle\DependencyInjection
  * @author  James Matsumura <james@casechek.com>
- *
- * @codeCoverageIgnore
  */
 class SecretsManagerClientFactory
 {
@@ -24,6 +22,7 @@ class SecretsManagerClientFactory
      * @throws Exception
      *
      * @return SecretsManagerClient
+     * @throws \Exception
      */
     public static function createClient(
         string $region,

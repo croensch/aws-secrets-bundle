@@ -1,4 +1,7 @@
 <?php
+/**
+ * This file belongs to Casechek. All rights reserved
+ */
 
 namespace Constup\AwsSecretsBundle\Tests\DependencyInjection;
 
