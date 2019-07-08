@@ -2,8 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Constup\AwsSecretsBundle\DependencyInjection;
-
+use Aws\Credentials\CredentialProvider;
 use Aws\SecretsManager\SecretsManagerClient;
 use Exception;
 
@@ -51,6 +50,6 @@ class SecretsManagerClientFactory
             $config['endpoint'] = $endpoint;
     }
 
-        return new SecretsManagerClient($credentialsConfig);
+        return new SecretsManagerClient($config);
 }
 }
