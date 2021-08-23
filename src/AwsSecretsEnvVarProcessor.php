@@ -1,8 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types = 1);
 
 namespace AwsSecretsBundle;
 
 use AwsSecretsBundle\Provider\AwsSecretsEnvVarProviderInterface;
+use Closure;
 use Symfony\Component\DependencyInjection\EnvVarProcessorInterface;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
@@ -13,13 +16,12 @@ use Symfony\Component\DependencyInjection\Exception\RuntimeException;
  */
 class AwsSecretsEnvVarProcessor implements EnvVarProcessorInterface
 {
-    public const AWS_SECRET_ID = 'SecretId';
-    public const AWS_SECRET_STRING = 'SecretString';
-
-    private $delimiter;
-    private $decodedSecrets = [];
-    private $ignore;
-    private $provider;
+    const AWS_SECRET_ID = 'SecretId';
+    const AWS_SECRET_STRING = 'SecretString';
+    private string $delimiter;
+    private array $decodedSecrets = [];
+    private bool $ignore;
+    private AwsSecretsEnvVarProviderInterface $provider;
 
     public function __construct(
         AwsSecretsEnvVarProviderInterface $provider,
@@ -36,13 +38,15 @@ class AwsSecretsEnvVarProcessor implements EnvVarProcessorInterface
      *
      * @param string $prefix The namespace of the variable
      * @param string $name The name of the variable within the namespace
-     * @param \Closure $getEnv A closure that allows fetching more env vars
+     * @param Closure $getEnv A closure that allows fetching more env vars
+     *
+     * @throws RuntimeException on error
      *
      * @return mixed
      *
      * @throws RuntimeException on error
      */
-    public function getEnv($prefix, $name, \Closure $getEnv)
+    public function getEnv(string $prefix, string $name, Closure $getEnv)
     {
         if ($this->ignore === true) {
             return $getEnv($name);
@@ -67,6 +71,9 @@ class AwsSecretsEnvVarProcessor implements EnvVarProcessorInterface
         return $result;
     }
 
+    /**
+     * @param bool $ignore
+     */
     public function setIgnore(bool $ignore): void
     {
         $this->ignore = $ignore;

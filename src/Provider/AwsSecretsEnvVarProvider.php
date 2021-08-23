@@ -1,7 +1,6 @@
-<?php declare(strict_types=1);
-/**
- * This file belongs to Casechek. All rights reserved
- */
+<?php
+
+declare(strict_types = 1);
 
 namespace AwsSecretsBundle\Provider;
 
@@ -12,9 +11,8 @@ use Aws\SecretsManager\SecretsManagerClient;
  */
 class AwsSecretsEnvVarProvider implements AwsSecretsEnvVarProviderInterface
 {
-    public const AWS_SECRET_ID = 'SecretId';
-    public const AWS_SECRET_STRING = 'SecretString';
-
+    const AWS_SECRET_ID = 'SecretId';
+    const AWS_SECRET_STRING = 'SecretString';
     private $secretsManagerClient;
 
     public function __construct(SecretsManagerClient $secretsManagerClient)
@@ -22,7 +20,12 @@ class AwsSecretsEnvVarProvider implements AwsSecretsEnvVarProviderInterface
         $this->secretsManagerClient = $secretsManagerClient;
     }
 
-    public function get($name)
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    public function get(string $name): string
     {
         return $this->secretsManagerClient
             ->getSecretValue([self::AWS_SECRET_ID => $name])

@@ -3,6 +3,8 @@
  * This file belongs to Casechek. All rights reserved
  */
 
+declare(strict_types = 1);
+
 namespace Tests\AwsSecretsBundle\Provider;
 
 use AwsSecretsBundle\Provider\AwsSecretsArrayEnvVarProvider;

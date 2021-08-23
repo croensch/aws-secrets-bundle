@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types = 1);
 
 namespace AwsSecretsBundle\DependencyInjection;
 
@@ -17,30 +19,29 @@ class SecretsManagerClientFactory
      * @param null|string $key
      * @param null|string $secret
      * @param null|string $version
+     *
+     * @throws Exception
+     *
      * @return SecretsManagerClient
      * @throws \Exception
      */
-    public static function createClient(
+    public function createClient(
         string $region,
         string $version,
         ?string $key,
         ?string $secret
-    ): SecretsManagerClient
-    {
+    ): SecretsManagerClient {
         $config = [
             'region' => $region,
-            'version' => $version
+            'version' => $version,
         ];
 
         if ($key && $secret) {
             $config['credentials'] = [
                 'key' => $key,
-                'secret' => $secret
+                'secret' => $secret,
             ];
-        } else if (
-            ($key && !$secret) ||
-            (!$key && $secret)
-        ) {
+        } elseif (($key && !$secret) || (!$key && $secret)) {
             throw new Exception('Both key and secret must be provided or neither');
         }
 

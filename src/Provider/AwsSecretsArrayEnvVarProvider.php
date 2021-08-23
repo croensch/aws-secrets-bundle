@@ -1,7 +1,6 @@
-<?php declare(strict_types=1);
-/**
- * This file belongs to Casechek. All rights reserved
- */
+<?php
+
+declare(strict_types = 1);
 
 namespace AwsSecretsBundle\Provider;
 
@@ -10,7 +9,7 @@ namespace AwsSecretsBundle\Provider;
  */
 class AwsSecretsArrayEnvVarProvider implements AwsSecretsEnvVarProviderInterface
 {
-    private $values = [];
+    private array $values = [];
     private $decorated;
 
     public function __construct(AwsSecretsEnvVarProviderInterface $decorated)
@@ -18,7 +17,12 @@ class AwsSecretsArrayEnvVarProvider implements AwsSecretsEnvVarProviderInterface
         $this->decorated = $decorated;
     }
 
-    public function get($name)
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    public function get(string $name): string
     {
         if (!isset($this->values[$name])) {
             $this->values[$name] = $this->decorated->get($name);

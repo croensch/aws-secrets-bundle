@@ -1,7 +1,6 @@
-<?php declare(strict_types=1);
-/**
- * This file belongs to Bandit. All rights reserved
- */
+<?php
+
+declare(strict_types = 1);
 
 namespace Tests\AwsSecretsBundle;
 
@@ -51,6 +50,7 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
             'AWS_SECRET',
             function ($name) use (&$callCount) {
                 $callCount++;
+
                 return 'value';
             }
         );

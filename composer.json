@@ -1,7 +1,7 @@
 {
-    "name": "incompass/aws-secrets-bundle",
+    "name": "constup/aws-secrets-bundle",
     "type": "symfony-bundle",
-    "description": "Loads ENV vars from AWS Secrets Manager",
+    "description": "Use AWS Secrets as service container parameters in Symfony.",
     "keywords": ["Symfony", "AWS", "ENV", "Secrets Manager"],
     "license": "MIT",
     "authors": [
@@ -19,17 +19,15 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
-        "ext-json": "*",
-        "aws/aws-sdk-php": "^3.62",
-        "symfony/dependency-injection": "^3.4 | ^4.0 | ^5.0"
+        "php": ">=7.4",
+        "symfony/dependency-injection": "^5.3",
+        "aws/aws-sdk-php": "^3.191",
+        "ext-json": "*"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-master",
-        "symfony/framework-bundle": "^3.4 | ^4.0 | ^5.0",
-        "phpunit/phpunit": "^9.5.26",
-        "symfony/phpunit-bridge": "*",
-        "friends-of-behat/symfony-extension": "^v2.3.1",
+        "symfony/framework-bundle": "^5.3",
+        "phpunit/phpunit": "^9.5",
+        "symfony/phpunit-bridge": "^5.3 | ^4.0",
         "phpspec/prophecy-phpunit": "^2.0"
     },
     "autoload": {

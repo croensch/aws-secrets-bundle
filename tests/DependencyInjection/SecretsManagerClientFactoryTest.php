@@ -3,7 +3,7 @@
  * This file belongs to Casechek. All rights reserved
  */
 
-namespace Tests\AwsSecretsBundle\Provider;
+namespace Tests\AwsSecretsBundle\DependencyInjection;
 
 use Aws\SecretsManager\SecretsManagerClient;
 use AwsSecretsBundle\DependencyInjection\SecretsManagerClientFactory;

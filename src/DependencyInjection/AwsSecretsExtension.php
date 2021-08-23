@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types = 1);
 
 namespace AwsSecretsBundle\DependencyInjection;
 
@@ -29,6 +31,7 @@ class AwsSecretsExtension extends Extension
      *
      * @param array $configs
      * @param ContainerBuilder $container
+     *
      * @throws Exception
      */
     public function load(array $configs, ContainerBuilder $container): void

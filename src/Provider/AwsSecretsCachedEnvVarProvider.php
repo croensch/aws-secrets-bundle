@@ -1,19 +1,18 @@
-<?php declare(strict_types=1);
-/**
- * This file belongs to Casechek. All rights reserved
- */
+<?php
+
+declare(strict_types = 1);
 
 namespace AwsSecretsBundle\Provider;
 
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
 
 /**
  * @author  Joe Mizzi <joe@casechek.com>
  */
 class AwsSecretsCachedEnvVarProvider implements AwsSecretsEnvVarProviderInterface
 {
-    public const CACHE_KEY_PREFIX = 'aws_secret';
-
+    const CACHE_KEY_PREFIX = 'aws_secret';
     private $cacheItemPool;
     private $decorated;
     private $ttl;
@@ -25,7 +24,14 @@ class AwsSecretsCachedEnvVarProvider implements AwsSecretsEnvVarProviderInterfac
         $this->ttl = $ttl;
     }
 
-    public function get($name)
+    /**
+     * @param string $name
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return string
+     */
+    public function get(string $name): string
     {
         $cacheKey = self::CACHE_KEY_PREFIX.'.'.md5($name);
         $cacheItem = $this->cacheItemPool->getItem($cacheKey);
