@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Constup\AwsSecretsBundle;
 
-use Constup\AwsSecretsBundle\Provider\AwsSecretsEnvVarProviderInterface;
 use Closure;
+use Constup\AwsSecretsBundle\Provider\AwsSecretsEnvVarProviderInterface;
 use Symfony\Component\DependencyInjection\EnvVarProcessorInterface;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\Exception\RuntimeException;
  */
 class AwsSecretsEnvVarProcessor implements EnvVarProcessorInterface
 {
-    const AWS_SECRET_ID = 'SecretId';
-    const AWS_SECRET_STRING = 'SecretString';
     private string $delimiter;
     private array $decodedSecrets = [];
     private bool $ignore;
