@@ -8,7 +8,6 @@ use Aws\SecretsManager\SecretsManagerClient;
 use AwsSecretsBundle\AwsSecretsEnvVarProcessor;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophet;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -17,7 +16,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  * Class FeatureContext
  * @author  Joe Mizzi <themizzi@me.com>
  */
-class FeatureContext implements Context, KernelAwareContext
+class FeatureContext implements Context
 {
     /** @var KernelInterface */
     private $kernel;
@@ -32,6 +31,9 @@ class FeatureContext implements Context, KernelAwareContext
     {
         $this->prophet = new Prophet();
         $this->client = $this->prophet->prophesize(SecretsManagerClient::class);
+
+        $this->kernel = new Kernel('test', true);
+        $this->kernel->boot();
     }
 
     /**

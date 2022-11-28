@@ -4,7 +4,9 @@ default:
       contexts:
         - FeatureContext
   extensions:
-    Behat\Symfony2Extension:
+    FriendsOfBehat\SymfonyExtension:
       kernel:
-        bootstrap: 'features/bootstrap/bootstrap.php'
-        class: 'Kernel'
+        class: Kernel
+        path: features/bootstrap/Kernel.php
+        environment: test
+      bootstrap: features/bootstrap/bootstrap.php

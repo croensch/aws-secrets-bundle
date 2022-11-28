@@ -10,6 +10,7 @@ use Aws\SecretsManager\SecretsManagerClient;
 use AwsSecretsBundle\AwsSecretsEnvVarProcessor;
 use AwsSecretsBundle\Provider\AwsSecretsEnvVarProviderInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * Class AwsSecretsEnvVarProcessorTest
@@ -18,13 +19,15 @@ use PHPUnit\Framework\TestCase;
  */
 class AwsSecretsEnvVarProcessorTest extends TestCase
 {
-    /** @var AwsSecretsEnvVarProcessor */
+    use ProphecyTrait;
+
+     /** @var AwsSecretsEnvVarProcessor */
     private $processor;
 
     /** @var AwsSecretsEnvVarProviderInterface */
     private $provider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->provider = $this->prophesize(AwsSecretsEnvVarProviderInterface::class);
 

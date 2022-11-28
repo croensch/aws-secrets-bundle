@@ -8,13 +8,16 @@ namespace Tests\AwsSecretsBundle\Provider;
 use AwsSecretsBundle\Provider\AwsSecretsArrayEnvVarProvider;
 use AwsSecretsBundle\Provider\AwsSecretsEnvVarProviderInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class AwsSecretsArrayEnvVarProviderTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $decorated;
     private $provider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->decorated = $this->prophesize(AwsSecretsEnvVarProviderInterface::class);
         $this->provider = new AwsSecretsArrayEnvVarProvider($this->decorated->reveal());
