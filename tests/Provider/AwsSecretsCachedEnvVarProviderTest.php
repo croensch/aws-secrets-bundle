@@ -50,8 +50,8 @@ class AwsSecretsCachedEnvVarProviderTest extends TestCase
     {
         $cacheItem = $this->prophesize(CacheItemInterface::class);
         $cacheItem->isHit()->shouldBeCalled()->willReturn(false);
-        $cacheItem->set('value')->shouldBeCalled();
-        $cacheItem->expiresAfter(60)->shouldBeCalled();
+        $cacheItem->set('value')->shouldBeCalled()->willReturn($cacheItem->reveal());
+        $cacheItem->expiresAfter(60)->shouldBeCalled()->willReturn($cacheItem->reveal());
         $this->cacheItemPool->save($cacheItem->reveal())->shouldBeCalled();
         $this->cacheItemPool->getItem(AwsSecretsCachedEnvVarProvider::CACHE_KEY_PREFIX.'.'.md5('key'))
             ->willReturn($cacheItem);

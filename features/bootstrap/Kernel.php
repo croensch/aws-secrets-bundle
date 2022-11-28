@@ -4,6 +4,7 @@
  */
 
 use AwsSecretsBundle\AwsSecretsBundle;
+use FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
@@ -21,22 +22,9 @@ class Kernel extends BaseKernel
      *
      * @return iterable|\Symfony\Component\HttpKernel\Bundle\BundleInterface An iterable of bundle instances
      */
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
-        return [new FrameworkBundle(), new AwsSecretsBundle()];
-    }
-
-    /**
-     * Add or import routes into your application.
-     *
-     *     $routes->import('config/routing.yml');
-     *     $routes->add('/admin', 'AppBundle:Admin:dashboard', 'admin_dashboard');
-     *
-     * @param \Symfony\Component\Routing\RouteCollectionBuilder $routes
-     */
-    protected function configureRoutes(\Symfony\Component\Routing\RouteCollectionBuilder $routes): void
-    {
-
+        return [new FrameworkBundle(), new AwsSecretsBundle(), new FriendsOfBehatSymfonyExtensionBundle()];
     }
 
     /**
@@ -82,12 +70,12 @@ class Kernel extends BaseKernel
         $c->setParameter('aws_secret_int', '%env(int:aws:AWS_SECRET)%');
     }
 
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return __DIR__.'/../../var/log/'.$this->getEnvironment();
     }
 
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return __DIR__.'/../../var/cache/'.$this->getEnvironment();
     }

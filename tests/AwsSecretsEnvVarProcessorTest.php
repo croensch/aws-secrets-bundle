@@ -18,7 +18,7 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
 {
     use ProphecyTrait;
 
-    /** @var AwsSecretsEnvVarProcessor */
+     /** @var AwsSecretsEnvVarProcessor */
     private $processor;
     /** @var AwsSecretsEnvVarProviderInterface */
     private $provider;
