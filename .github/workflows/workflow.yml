@@ -10,7 +10,7 @@ on:
 
 jobs:
   phpunit_tests:
-    name: Run phpunit unit tests for PHP ${{ matrix.php-versions }}
+    name: Run automated tests for PHP ${{ matrix.php-versions }}
     runs-on: ubuntu-22.04
     strategy:
       matrix:
