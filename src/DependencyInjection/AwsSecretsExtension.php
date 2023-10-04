@@ -4,10 +4,10 @@ namespace AwsSecretsBundle\DependencyInjection;
 
 use Aws\SecretsManager\SecretsManagerClient;
 use AwsSecretsBundle\AwsSecretsEnvVarProcessor;
-use AwsSecretsBundle\Command\AwsSecretValueCommand;
 use AwsSecretsBundle\Provider\AwsSecretsArrayEnvVarProvider;
 use AwsSecretsBundle\Provider\AwsSecretsCachedEnvVarProvider;
 use AwsSecretsBundle\Provider\AwsSecretsEnvVarProvider;
+use Exception;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -29,6 +29,7 @@ class AwsSecretsExtension extends Extension
      *
      * @param array $configs
      * @param ContainerBuilder $container
+     * @throws Exception
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -41,8 +42,12 @@ class AwsSecretsExtension extends Extension
 
         $container->register('aws_secrets.secrets_manager_client', SecretsManagerClient::class)
             ->setLazy(true)
-            ->addArgument($configs['client_config'])
-            ->setPublic(false);
+            ->setPublic(false)
+            ->addArgument($configs['client_config']['region'])
+            ->addArgument($configs['client_config']['version'])
+            ->addArgument($configs['client_config']['credentials']['key'])
+            ->addArgument($configs['client_config']['credentials']['secret'])
+            ->setFactory([SecretsManagerClientFactory::class, 'createClient']);
 
         $container->setAlias('aws_secrets.client', 'aws_secrets.secrets_manager_client')
             ->setPublic(true);

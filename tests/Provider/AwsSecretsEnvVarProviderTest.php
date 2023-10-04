@@ -9,13 +9,16 @@ use Aws\Result;
 use Aws\SecretsManager\SecretsManagerClient;
 use AwsSecretsBundle\Provider\AwsSecretsEnvVarProvider;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class AwsSecretsEnvVarProviderTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $secretsManagerClient;
     private $provider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->secretsManagerClient = $this->prophesize(SecretsManagerClient::class);
         $this->provider = new AwsSecretsEnvVarProvider($this->secretsManagerClient->reveal());

@@ -1,0 +1,34 @@
+name: aws-secrets-bundle workflow
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  phpunit_tests:
+    name: Run automated tests for PHP ${{ matrix.php-versions }}
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        php-versions: [ '7.4', '8.0', '8.1' ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+
+      - name: Install composer packages
+        run: composer install
+
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit
+
+      - name: Run Behat tests
+        run: vendor/bin/behat --colors --format progress

@@ -10,6 +10,7 @@ use Aws\SecretsManager\SecretsManagerClient;
 use AwsSecretsBundle\AwsSecretsEnvVarProcessor;
 use AwsSecretsBundle\Provider\AwsSecretsEnvVarProviderInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * Class AwsSecretsEnvVarProcessorTest
@@ -18,13 +19,15 @@ use PHPUnit\Framework\TestCase;
  */
 class AwsSecretsEnvVarProcessorTest extends TestCase
 {
-    /** @var AwsSecretsEnvVarProcessor */
+    use ProphecyTrait;
+
+     /** @var AwsSecretsEnvVarProcessor */
     private $processor;
 
     /** @var AwsSecretsEnvVarProviderInterface */
     private $provider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->provider = $this->prophesize(AwsSecretsEnvVarProviderInterface::class);
 
@@ -101,5 +104,30 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
 
         $this->assertEquals(1, $callCount);
         $this->assertEquals('value', $value);
+    }
+
+    /**
+     * @test
+     */
+    public function it_throws_a_runtime_exception_for_invalid_key(): void
+    {
+        $this->provider->get('prefix/db')->willReturn('{"key":"value"}');
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage("Key 'yek' not found in secret 'prefix/db'");
+
+        $callCount = 0;
+        $value = $this->processor->getEnv(
+            'aws',
+            'AWS_SECRET',
+            function (string $name) use (&$callCount) {
+                $callCount++;
+                if ($callCount === 1) {
+                    return 'prefix/db,yek';
+                }
+
+                return null;
+            }
+        );
     }
 }

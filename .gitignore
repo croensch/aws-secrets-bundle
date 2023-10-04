@@ -36,6 +36,7 @@
 # PHPUnit
 /app/phpunit.xml
 /phpunit.xml
+.phpunit.result.cache
 
 # Build data
 /build/
@@ -153,4 +154,4 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
-composer.lock
+*.bak
