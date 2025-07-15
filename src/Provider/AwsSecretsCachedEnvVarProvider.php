@@ -7,9 +7,6 @@ namespace Constup\AwsSecretsBundle\Provider;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
 
-/**
- * @author  Joe Mizzi <joe@casechek.com>
- */
 class AwsSecretsCachedEnvVarProvider implements AwsSecretsEnvVarProviderInterface
 {
     const CACHE_KEY_PREFIX = 'aws_secret';

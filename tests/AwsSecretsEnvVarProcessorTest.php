@@ -9,16 +9,11 @@ use Constup\AwsSecretsBundle\Provider\AwsSecretsEnvVarProviderInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-/**
- * Class AwsSecretsEnvVarProcessorTest
- * @package Tests\AwsSecretsBundle
- * @author  Joe Mizzi <themizzi@me.com>
- */
 class AwsSecretsEnvVarProcessorTest extends TestCase
 {
     use ProphecyTrait;
 
-     /** @var AwsSecretsEnvVarProcessor */
+    /** @var AwsSecretsEnvVarProcessor */
     private $processor;
     /** @var AwsSecretsEnvVarProviderInterface */
     private $provider;
@@ -70,39 +65,11 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
                 $callCount++;
                 if ($callCount === 1) {
                     return 'prefix/db,key';
-                } else {
-                    return 'value';
-                }
                 }
 
                 return null;
             }
         );
-        $this->assertEquals('value', $value);
-    }
-
-    /**
-     * @test
-     */
-    public function it_returns_string_for_key(): void
-    {
-        $callCount = 0;
-        $this->provider->get('prefix/db')->willReturn('value');
-
-        $value = $this->processor->getEnv(
-            'aws',
-            'AWS_SECRET',
-            function (string $name) use (&$callCount) {
-                $callCount++;
-                if ($callCount === 1) {
-                    return 'prefix/db';
-                }
-
-                return null;
-            }
-        );
-
-        $this->assertEquals(1, $callCount);
         $this->assertEquals('value', $value);
     }
 

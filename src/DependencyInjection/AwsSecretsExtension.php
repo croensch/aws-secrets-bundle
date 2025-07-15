@@ -17,13 +17,6 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * Class AwsSecretsExtension
- * @package AwsSecretsBundle\DependencyInjection
- * @author  Joe Mizzi <joe@casechek.com>
- *
- * @codeCoverageIgnore
- */
 class AwsSecretsExtension extends Extension
 {
     /**
@@ -45,8 +38,13 @@ class AwsSecretsExtension extends Extension
 
         $container->register('aws_secrets.secrets_manager_client', SecretsManagerClient::class)
             ->setLazy(true)
-            ->addArgument($configs['client_config'])
-            ->setPublic(false);
+            ->setPublic(false)
+            ->addArgument($configs['client_config']['region'])
+            ->addArgument($configs['client_config']['version'])
+            ->addArgument($configs['client_config']['endpoint'])
+            ->addArgument($configs['client_config']['credentials']['key'])
+            ->addArgument($configs['client_config']['credentials']['secret'])
+            ->setFactory([SecretsManagerClientFactory::class, 'createClient']);
 
         $container->setAlias('aws_secrets.client', 'aws_secrets.secrets_manager_client')
             ->setPublic(true);

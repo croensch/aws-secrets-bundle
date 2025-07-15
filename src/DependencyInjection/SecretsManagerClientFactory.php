@@ -2,15 +2,11 @@
 
 declare(strict_types = 1);
 
-use Aws\Credentials\CredentialProvider;
+namespace Constup\AwsSecretsBundle\DependencyInjection;
+
 use Aws\SecretsManager\SecretsManagerClient;
 use Exception;
 
-/**
- * Class SecretsManagerFactory
- * @package AwsSecretsBundle\DependencyInjection
- * @author  James Matsumura <james@casechek.com>
- */
 class SecretsManagerClientFactory
 {
     /**
@@ -22,12 +18,11 @@ class SecretsManagerClientFactory
      * @throws Exception
      *
      * @return SecretsManagerClient
-     * @throws \Exception
      */
     public static function createClient(
         string $region,
         string $version,
-        ?string $endpoint,
+        ?string $endpoint, 
         ?string $key,
         ?string $secret
     ): SecretsManagerClient {
@@ -47,8 +42,8 @@ class SecretsManagerClientFactory
 
         if ($endpoint) {
             $config['endpoint'] = $endpoint;
-    }
+        }
 
         return new SecretsManagerClient($config);
-}
+    }
 }
