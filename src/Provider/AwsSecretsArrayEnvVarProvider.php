@@ -4,9 +4,6 @@ declare(strict_types = 1);
 
 namespace Constup\AwsSecretsBundle\Provider;
 
-/**
- * @author  Joe Mizzi <joe@casechek.com>
- */
 class AwsSecretsArrayEnvVarProvider implements AwsSecretsEnvVarProviderInterface
 {
     private array $values = [];

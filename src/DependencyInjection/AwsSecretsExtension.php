@@ -17,19 +17,12 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * Class AwsSecretsExtension
- * @package AwsSecretsBundle\DependencyInjection
- * @author  Joe Mizzi <joe@casechek.com>
- *
- * @codeCoverageIgnore
- */
 class AwsSecretsExtension extends Extension
 {
     /**
      * Loads a specific configuration.
      *
-     * @param array $configs
+     * @param array            $configs
      * @param ContainerBuilder $container
      *
      * @throws Exception

@@ -7,9 +7,6 @@ namespace Constup\AwsSecretsBundle\Provider;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
 
-/**
- * @author  Joe Mizzi <joe@casechek.com>
- */
 class AwsSecretsCachedEnvVarProvider implements AwsSecretsEnvVarProviderInterface
 {
     const CACHE_KEY_PREFIX = 'aws_secret';
@@ -33,7 +30,7 @@ class AwsSecretsCachedEnvVarProvider implements AwsSecretsEnvVarProviderInterfac
      */
     public function get(string $name): string
     {
-        $cacheKey = self::CACHE_KEY_PREFIX.'.'.md5($name);
+        $cacheKey = self::CACHE_KEY_PREFIX . '.' . md5($name);
         $cacheItem = $this->cacheItemPool->getItem($cacheKey);
 
         if ($cacheItem->isHit()) {

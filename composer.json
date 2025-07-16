@@ -4,20 +4,6 @@
     "description": "Use AWS Secrets as service container parameters in Symfony.",
     "keywords": ["Symfony", "AWS", "ENV", "Secrets Manager"],
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Joe Mizzi",
-            "email": "joe@casechek.com"
-        },
-        {
-            "name": "James Matsumura",
-            "email": "james@casechek.com"
-        },
-        {
-            "name": "Steven Lehn",
-            "email": "steven.lehn@casechek.com"
-        }
-    ],
     "require": {
         "php": ">=8.0",
         "symfony/dependency-injection": "^6.0",
