@@ -38,13 +38,13 @@ environments and using credentials is covered here: [AWS credentials and authent
 
 There are two main versions of AWS Secrets bundle: 1.x and 2.x.
 
-Install version 1.x to use this package with Symfony 5.x (5.3+) and PHP 7.4.
+Install version 1.5 to use this package with Symfony 5.4 and PHP 7.4.
 
-    $ composer require constup/aws-secrets-bundle:^1
+    $ composer require constup/aws-secrets-bundle:^1.5
 
-Install version 2.x to use this package with Symfony 6.x and PHP 8.x.
+Install version 1.6 to use this package with Symfony 5.4/6.x and PHP 7.4/8.x.
 
-    $ composer require constup/aws-secrets-bundle:^2
+    $ composer require constup/aws-secrets-bundle:^1.6
 
 ## Configuration
 
@@ -84,12 +84,6 @@ parameters:
 ```
 
 Your secret will now be loaded at runtime!
-
-## Development notes
-
-- `master` branch only contains documentation.
-- `di5` branch is compatible with PHP 7.4+ and Symfony Dependency Injection 5.3+. Release tags for this branch are 1.x.x
-- `di6` branch is compatible with PHP 8.x and Symfony Dependency Injection 6.0+. Release tags for this branch are 2.x.x
 
 ## Examples
 
